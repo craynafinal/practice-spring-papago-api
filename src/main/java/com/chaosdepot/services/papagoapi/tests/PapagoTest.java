@@ -1,11 +1,14 @@
 package com.chaosdepot.services.papagoapi.tests;
 
-import com.chaosdepot.services.papagoapi.enums.Language;
+import com.chaosdepot.services.papagoapi.domains.PapagoTranslationContainer;
 import com.chaosdepot.services.papagoapi.screens.PapagoPage;
+import com.chaosdepot.services.papagoapi.utilities.WebDriverKiller;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import javax.annotation.PreDestroy;
 
 /**
  * Performs test against Papago ui.
@@ -20,24 +23,30 @@ public class PapagoTest {
      */
     public PapagoTest() {
         WebDriverManager.chromedriver().setup();
+        webDriver = getWebDriver();
+        WebDriverKiller.setWebDriver(webDriver);
+    }
+
+    /**
+     * Get Webdriver.
+     * This will return headless browser.
+     *
+     * @return webdriver
+     */
+    private WebDriver getWebDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1920,1080");
         options.setHeadless(true);
-        webDriver = new ChromeDriver(options);
+        return new ChromeDriver(options);
     }
 
     /**
      * Translate the language in Papago ui and return result in string.
-     * @param translate string to translate
-     * @param sourceLanaguage source language
-     * @param targetLanguage target language
+     *
+     * @param container configuration of translation
      */
-    public String shouldTranslate(String translate, Language sourceLanaguage, Language targetLanguage) {
-        if (translate.length() > PapagoPage.MAX_CHAR) {
-            return "Cannot translate more than 5000 characters.";
-        }
-
-        String url = getUrl(translate, sourceLanaguage, targetLanguage);
+    public String shouldTranslate(PapagoTranslationContainer container) {
+        String url = getUrl(container);
         if (!webDriver.getCurrentUrl().equals(url)) {
             webDriver.get(url);
         }
@@ -49,6 +58,7 @@ public class PapagoTest {
     /**
      * Exit web driver.
      */
+    @PreDestroy
     public void exitWebDriver() {
         if (webDriver != null) {
             webDriver.quit();
@@ -58,14 +68,13 @@ public class PapagoTest {
     /**
      * Get complete Papago url.
      *
-     * @param sourceLanguage source language
-     * @param targetLanguage target language
+     * @param container translation configuration
      * @return complete url
      */
-    private static String getUrl(String translate, Language sourceLanguage, Language targetLanguage) {
+    private static String getUrl(PapagoTranslationContainer container) {
         String url = "https://papago.naver.com/?sk=[SOURCE]&tk=[TARGET]&st=[TRANSLATE]";
-        return url.replace("[SOURCE]", sourceLanguage.value())
-                .replace("[TARGET]", targetLanguage.value())
-                .replace("[TRANSLATE]", translate.replaceAll(" ", "%20"));
+        return url.replace("[SOURCE]", container.getSourceLanguage().value())
+                .replace("[TARGET]", container.getTargetLanguage().value())
+                .replace("[TRANSLATE]", container.getSourceText().replaceAll(" ", "%20"));
     }
 }

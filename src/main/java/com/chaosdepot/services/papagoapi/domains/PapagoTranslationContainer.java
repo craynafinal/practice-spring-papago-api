@@ -10,6 +10,15 @@ public class PapagoTranslationContainer {
     private Language targetLanguage;
     private String sourceText;
     private String targetText;
+    private String errorMessage;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     public Language getSourceLanguage() {
         return sourceLanguage;
