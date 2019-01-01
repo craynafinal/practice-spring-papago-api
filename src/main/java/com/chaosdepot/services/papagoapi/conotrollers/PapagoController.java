@@ -3,18 +3,15 @@ package com.chaosdepot.services.papagoapi.conotrollers;
 import com.chaosdepot.services.papagoapi.domains.PapagoTranslationContainer;
 import com.chaosdepot.services.papagoapi.tests.PapagoTest;
 import com.rits.cloning.Cloner;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Papago api controller.
  */
-@Controller
+@RestController
 public class PapagoController {
     private PapagoTest papagoTest;
 
