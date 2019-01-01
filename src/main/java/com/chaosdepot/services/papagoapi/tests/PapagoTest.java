@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 /**
  * Performs test against Papago ui.
  * This will not use Testng to execute tests as this is expected to keep running
- * while spring boot api service is up.
+ * while spring boot api conotrollers is up.
  */
 public class PapagoTest {
     private WebDriver webDriver;
@@ -22,7 +22,7 @@ public class PapagoTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1920,1080");
-        options.setHeadless(false);
+        options.setHeadless(true);
         webDriver = new ChromeDriver(options);
     }
 
@@ -33,7 +33,7 @@ public class PapagoTest {
      * @param targetLanguage target language
      */
     public String shouldTranslate(String translate, Language sourceLanaguage, Language targetLanguage) {
-        if (translate.length() > 5000) {
+        if (translate.length() > PapagoPage.MAX_CHAR) {
             return "Cannot translate more than 5000 characters.";
         }
 

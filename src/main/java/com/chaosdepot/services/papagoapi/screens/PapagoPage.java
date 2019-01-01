@@ -23,6 +23,7 @@ public class PapagoPage {
 
     private WebDriverWait wait;
     private static final int MAX_WAIT = 10;
+    public static final int MAX_CHAR = 5000;
 
     /**
      * Webdriver is used for wait and initializing page factory elements.
