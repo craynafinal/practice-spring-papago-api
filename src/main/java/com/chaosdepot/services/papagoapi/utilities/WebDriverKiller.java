@@ -23,7 +23,7 @@ public class WebDriverKiller {
      * Kill web driver if initialized.
      */
     @PreDestroy
-    public void destroy() {
+    public static void destroy() {
         if (WebDriverKiller.webDriver != null) {
             WebDriverKiller.webDriver.quit();
         }

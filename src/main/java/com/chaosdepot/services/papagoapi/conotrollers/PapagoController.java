@@ -6,6 +6,7 @@ import com.chaosdepot.services.papagoapi.tests.PapagoTest;
 import com.rits.cloning.Cloner;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
