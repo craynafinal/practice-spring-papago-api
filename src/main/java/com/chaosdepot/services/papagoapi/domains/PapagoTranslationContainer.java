@@ -12,6 +12,27 @@ public class PapagoTranslationContainer {
     private String targetText;
     private String errorMessage;
 
+    /**
+     * Validate data.
+     *
+     * @return error message if there is a problem; otherwise empty string
+     */
+    public String validateData() {
+        if (getSourceLanguage() == null || getTargetLanguage() == null) {
+            return "You need to pass source and target languages.";
+        }
+
+        if (getSourceText() == null || getSourceText().isEmpty()) {
+            return "You need to pass source text.";
+        }
+
+        if (getSourceText().length() > 5000) {
+            return "Cannot translate more than 5000 characters.";
+        }
+
+        return "";
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }

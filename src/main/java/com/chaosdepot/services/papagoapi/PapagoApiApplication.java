@@ -10,4 +10,3 @@ public class PapagoApiApplication {
 		SpringApplication.run(PapagoApiApplication.class, args);
 	}
 }
-
