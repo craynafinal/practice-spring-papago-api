@@ -17,16 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class AppConfig extends WebSecurityConfigurerAdapter {
     /**
-     * Get web driver kill class.
-     *
-     * @return web driver kill
-     */
-    @Bean
-    public WebDriverKiller taskKill() {
-        return new WebDriverKiller();
-    }
-
-    /**
      * Setup user info.
      *
      * @param auth auth manager
@@ -54,5 +44,15 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
             .httpBasic().and().authorizeRequests()
             .anyRequest().authenticated()
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+    /**
+     * Get web driver kill class.
+     *
+     * @return web driver kill
+     */
+    @Bean
+    public WebDriverKiller taskKill() {
+        return new WebDriverKiller();
     }
 }
