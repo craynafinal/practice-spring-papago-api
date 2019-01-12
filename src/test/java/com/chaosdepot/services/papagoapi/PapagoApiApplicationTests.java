@@ -68,7 +68,7 @@ public class PapagoApiApplicationTests {
     @Test
     public void shouldReturnOkayForHealthCheck() {
         ResponseEntity<String> response = getCorrectUserTemplate().getForEntity(getHealthCheckURL(), String.class);
-        assertThat(response.getStatusCode()).as("Status code should be 200").isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).as("Status code should be ok").isEqualTo(HttpStatus.OK);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PapagoApiApplicationTests {
         container.setSourceText("hello");
 
         ResponseEntity<String> response = getCorrectUserTemplate().postForEntity(getPapagoURL(), container, String.class);
-        assertThat(response.getStatusCode()).as("Status code should be 200").isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).as("Status code should be ok").isEqualTo(HttpStatus.OK);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class PapagoApiApplicationTests {
 
         ResponseEntity<String> response = getIncorrectUserTemplate().postForEntity(getPapagoURL(), container, String.class);
 
-        assertThat(response.getStatusCode()).as("Status code should be 401").isEqualTo(HttpStatus.UNAUTHORIZED);
+        assertThat(response.getStatusCode()).as("Status code should be unauth").isEqualTo(HttpStatus.UNAUTHORIZED);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class PapagoApiApplicationTests {
 
         ResponseEntity<String> response = getCorrectUserTemplate().postForEntity(getPapagoURL(), container, String.class);
 
-        assertThat(response.getStatusCode()).as("Status code should be 400").isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getStatusCode()).as("Status code should be bad").isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class PapagoApiApplicationTests {
 
         ResponseEntity<String> response = getCorrectUserTemplate().postForEntity(getPapagoURL(), container, String.class);
 
-        assertThat(response.getStatusCode()).as("Status code should be 400").isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getStatusCode()).as("Status code should be bad").isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class PapagoApiApplicationTests {
 
         ResponseEntity<String> response = getCorrectUserTemplate().postForEntity(getPapagoURL(), container, String.class);
 
-        assertThat(response.getStatusCode()).as("Status code should be 400").isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(response.getStatusCode()).as("Status code should be bad").isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }
 
