@@ -30,6 +30,15 @@ public class PapagoApiApplicationTests {
     }
 
     /**
+     * Return health check url.
+     *
+     * @return health check url
+     */
+    public String getHealthCheckURL() {
+        return getBaseURL() + "/healthCheck";
+    }
+
+    /**
      * Return base url.
      *
      * @return base url
@@ -54,6 +63,12 @@ public class PapagoApiApplicationTests {
      */
     public TestRestTemplate getIncorrectUserTemplate() {
         return new TestRestTemplate("wrong_user", "wrong_pass");
+    }
+
+    @Test
+    public void shouldReturnOkayForHealthCheck() {
+        ResponseEntity<String> response = getCorrectUserTemplate().getForEntity(getHealthCheckURL(), String.class);
+        assertThat(response.getStatusCode()).as("Status code should be 200").isEqualTo(HttpStatus.OK);
     }
 
     @Test

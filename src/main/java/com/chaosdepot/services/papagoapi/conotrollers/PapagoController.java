@@ -3,6 +3,7 @@ package com.chaosdepot.services.papagoapi.conotrollers;
 import com.chaosdepot.services.papagoapi.domains.PapagoTranslationContainer;
 import com.chaosdepot.services.papagoapi.tests.PapagoTest;
 import com.rits.cloning.Cloner;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,16 @@ public class PapagoController {
         PapagoTranslationContainer error = new PapagoTranslationContainer();
         error.setErrorMessage(message);
         return ResponseEntity.badRequest().body(error);
+    }
+
+    /**
+     * Health check endpoint.
+     *
+     * @return 200 response entity.
+     */
+    @RequestMapping(value = {"/healthCheck"}, method = RequestMethod.GET)
+    public ResponseEntity healthCheck() {
+        return ResponseEntity.status(HttpStatus.OK).body(new PapagoTranslationContainer());
     }
 
     /**
