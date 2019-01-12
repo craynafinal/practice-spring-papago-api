@@ -27,8 +27,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-            .withUser("user")
-            .password("{noop}pass")
+            .withUser(System.getenv().get("USER"))
+            .password(System.getenv().get("PASSWORD"))
             .roles("USER", "ADMIN");
     }
 
