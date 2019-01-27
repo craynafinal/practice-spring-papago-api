@@ -25,10 +25,16 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        String username = System.getenv().get("USER");
+        String password = System.getenv().get("PASSWORD");
+
+        username = username == null || username.isEmpty() ? "user" : username;
+        password = password == null || password.isEmpty() ? "{noop}pass" : password;
+
         auth
             .inMemoryAuthentication()
-            .withUser(System.getenv().get("USER"))
-            .password(System.getenv().get("PASSWORD"))
+            .withUser(username)
+            .password(password)
             .roles("USER", "ADMIN");
     }
 

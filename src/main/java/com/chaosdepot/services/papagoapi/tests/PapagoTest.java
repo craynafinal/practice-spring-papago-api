@@ -23,8 +23,6 @@ public class PapagoTest {
      */
     public PapagoTest() {
         WebDriverManager.chromedriver().setup();
-        webDriver = getWebDriver();
-        WebDriverKiller.setWebDriver(webDriver);
     }
 
     /**
@@ -46,13 +44,20 @@ public class PapagoTest {
      * @param container configuration of translation
      */
     public String shouldTranslate(PapagoTranslationContainer container) {
+        exitWebDriver();
+        webDriver = getWebDriver();
+        WebDriverKiller.setWebDriver(webDriver);
+
         String url = getUrl(container);
         if (!webDriver.getCurrentUrl().equals(url)) {
             webDriver.get(url);
         }
 
         PapagoPage papagoPage = new PapagoPage(webDriver);
-        return papagoPage.getTargetText();
+        String result = papagoPage.getTargetText();
+
+        exitWebDriver();
+        return result;
     }
 
     /**
