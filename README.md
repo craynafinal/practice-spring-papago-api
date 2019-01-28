@@ -12,7 +12,7 @@
 - Build Dockerfile
     - docker build .
 - Deploy to heroku
-    - heroku container:push web
-    - heroku container:release web
+    - heroku container:push web --app <appname>
+    - heroku container:release web --app <appname>
 ## References
 - https://medium.com/@urbanswati/deploying-spring-boot-restapi-using-docker-maven-heroku-and-accessing-it-using-your-custom-aa04798c0112
